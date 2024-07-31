@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendship Zone - Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1em 0;
+        }
+        main {
+            padding: 2em 0;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 1em 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            margin: 0 auto;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1em;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            // Validate Name
+            const name = document.getElementById('name').value;
+            const nameError = document.getElementById('nameError');
+            if (name.length < 3 || /\d/.test(name)) {
+                nameError.textContent = 'Name must be at least 3 characters long and contain no numbers.';
+                isValid = false;
+            } else {
+                nameError.textContent = '';
+            }
+
+            // Validate Email
+            const email = document.getElementById('email').value;
+            const emailError = document.getElementById('emailError');
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                emailError.textContent = 'Please enter a valid email address.';
+                isValid = false;
+            } else {
+                emailError.textContent = '';
+            }
+
+            // Validate Age
+            const age = document.getElementById('age').value;
+            const ageError = document.getElementById('ageError');
+            if (age < 18 || isNaN(age)) {
+                ageError.textContent = 'You must be at least 18 years old to register.';
+                isValid = false;
+            } else {
+                ageError.textContent = '';
+            }
+
+            return isValid;
+        }
+
+        function handleUserRegistration(event) {
+            if (!validateForm()) {
+                event.preventDefault();
+            } else {
+                window.location.href = 'RegistrationConfirmationform.html';
+            }
+        }
+
+        function handleAdminRegistration(event) {
+            window.location.href = 'RegistrationConfirmationforAdminform.html';
+        }
+    </script>
+</head>
+<body>
+    <!-- Header section -->
+    <header>
+        <h1>Friendship Zone - Registration Form</h1>
+    </header>
+
+    <!-- Main content section -->
+    <main>
+        <form onsubmit="handleUserRegistration(event)">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                <div id="nameError" class="error"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <div id="emailError" class="error"></div>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" required>
+                <div id="ageError" class="error"></div>
+            </div>
+            <button type="submit">Register</button>
+            <button type="button" onclick="handleAdminRegistration()">Register as Admin</button>
+        </form>
+    </main>
+
+    <!-- Footer section with social media links -->
+    <footer>
+        <section>
+            <p>Follow us on:</p>
+            <ul>
+                <li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>
+                <li><a href="https://www.twitter.com" target="_blank">Twitter</a></li>
+                <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
+                <li><a href="https://www.threads.net" target="_blank">Threads</a></li>
+            </ul>
+        </section>
+    </footer>
+</body>
+</html>
